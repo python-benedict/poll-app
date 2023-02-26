@@ -1,0 +1,4 @@
+CHECKING THE VERSION OF DJANGO
+
+    python -m django --version
+
