@@ -9,7 +9,7 @@ from django.http import Http404
 def index(request):
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
     context = {'latest_question_list': latest_question_list}
-    return render(request, 'polls/index.html', context)
+    return render(request, 'pollApp/index.html', context)
 
 def detail(request, question_id):
     # try:
