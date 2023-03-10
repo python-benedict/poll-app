@@ -8,3 +8,6 @@ MIGRATIONS
 By running makemigrations, you’re telling Django that you’ve made some changes to your models (in this case, you’ve made new ones) and that you’d like the changes to be stored as a migration.
 
 Migrations are how Django stores changes to your models
+
+created five branches
+each one is for a different part starting from reqeust and response to testing and customizing the admin interface
