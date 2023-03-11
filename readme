@@ -11,3 +11,14 @@ Migrations are how Django stores changes to your models
 
 created five branches
 each one is for a different part starting from reqeust and response to testing and customizing the admin interface
+
+testing the view
+
+from django.test.utils import setup_test_environment
+>>> setup_test_environment()
+>>> from django.test import Client
+>>> client = Client()
+>>> response = client.get('/')
+>>> response.status_code
+200
+>>> response = client.get('/polls/')
