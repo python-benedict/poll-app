@@ -57,5 +57,9 @@ class QuestionIndexViewTests(TestCase):
         self.assertQuerysetEqual(response.context['latest_question_list'], [])
         
     
-
+    def test_past_question(self):
+        question = Question.objects.create(question_text='Past Question', pub_date=timezone.now() - datetime.timedelta(days=4))
+        response = self.client.get(reverse('pollApp:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(response.context['latest_question_list'], [question])
         
