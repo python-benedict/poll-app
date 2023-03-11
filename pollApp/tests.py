@@ -63,3 +63,10 @@ class QuestionIndexViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(response.context['latest_question_list'], [question])
         
+        
+    def test_future_question(self):
+        question = Question.objects.create(question_text='Future Question', pub_date=timezone.now() + datetime.timedelta(days=4))
+        response = self.client.get(reverse('pollApp:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'No polls are available')
+        self.assertQuerysetEqual(response.context['latest_question_list'], [])
