@@ -1,6 +1,7 @@
 from django.test import TestCase
 import datetime
 from django.utils import timezone
+from django.urls import reverse
 
 from .models import Question
 # Create your tests here.
@@ -45,3 +46,16 @@ def create_question(question_text, days):
     """
     time = timezone.now() + datetime.timedelta(days=days)
     return Question.objects.create(question_text=question_text, pub_date=time)
+
+
+class QuestionIndexViewTests(TestCase):
+    def test_no_question(self):
+        "testing for case where there is no question"
+        response = self.client.get(reverse('pollApp:index'))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'No polls are available')
+        self.assertQuerysetEqual(response.context['latest_question_list'], [])
+        
+    
+
+        
