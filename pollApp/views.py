@@ -50,6 +50,10 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'pollApp/detail.html'
+    
+    def get_queryset(self):
+        "we want to return just the past questions so that if  a user guesses the future question right it won't affect the outcome or he won't see it in the detail page"
+        return Question.objects.filter(pub_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
